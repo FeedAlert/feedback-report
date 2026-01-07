@@ -1,4 +1,4 @@
-# 📊 FeedAlert – Weekly Feedback Report Function
+# 📊 Weekly Feedback Report Function
 
 Esta Cloud Function é responsável por **gerar e enviar automaticamente o relatório semanal de satisfação dos alunos** da plataforma FeedAlert.
 

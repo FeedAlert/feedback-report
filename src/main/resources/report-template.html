@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>Relatório Semanal</title>
+
+    <style type="text/css">
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f5f7fa;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .page {
+            width: 100%;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 32px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 26px;
+            color: #1f2937;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 6px;
+        }
+
+        h2 {
+            font-size: 18px;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            color: #374151;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 6px;
+        }
+
+        /* ===== Summary cards ===== */
+        .summary {
+            display: table;
+            width: 100%;
+            margin-top: 28px;
+            border-spacing: 16px;
+        }
+
+        .summary-card {
+            display: table-cell;
+            background-color: #f9fafb;
+            border-radius: 8px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .value {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .label {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 6px;
+        }
+
+        /* ===== Rating colors ===== */
+        .rating-excellent {
+            color: #16a34a; /* green */
+        }
+
+        .rating-good {
+            color: #2563eb; /* blue */
+        }
+
+        .rating-regular {
+            color: #f59e0b; /* amber */
+        }
+
+        .rating-bad {
+            color: #dc2626; /* red */
+        }
+
+        /* ===== Status colors ===== */
+        .urgent {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .normal {
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+        ul {
+            padding-left: 18px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 12px;
+            color: #9ca3af;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+<div class="page">
+    <div class="container">
+
+        <h1>Relatório Semanal de Feedback</h1>
+        <div class="subtitle">Período: {{REPORT_DATE_RANGE}}</div>
+
+        <div class="summary">
+            <div class="summary-card">
+                <div class="value rating {{RATING_CLASS}}">
+                    {{AVERAGE_RATING}}/5
+                </div>
+                <div class="label">Avaliação Média</div>
+            </div>
+
+            <div class="summary-card">
+                <div class="value">
+                    {{TOTAL_FEEDBACKS}}
+                </div>
+                <div class="label">Total de Feedbacks</div>
+            </div>
+
+            <div class="summary-card">
+                <div class="value urgent">
+                    {{TOTAL_URGENT}}
+                </div>
+                <div class="label">Feedbacks Urgentes</div>
+            </div>
+
+            <div class="summary-card">
+                <div class="value normal">
+                    {{TOTAL_NORMAL}}
+                </div>
+                <div class="label">Feedbacks Não Urgentes</div>
+            </div>
+        </div>
+
+        <h2>Feedbacks por Dia</h2>
+        <ul>
+            {{FEEDBACKS_PER_DAY_LIST}}
+        </ul>
+
+        <h2>Comentários dos Usuários</h2>
+        <ul>
+            {{COMMENTS_LIST}}
+        </ul>
+
+        <div class="footer">
+            Relatório gerado automaticamente pela plataforma <strong>FeedAlert</strong>.
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

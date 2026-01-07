@@ -5,8 +5,6 @@ Esta Cloud Function é responsável por **gerar e enviar automaticamente o relat
 O relatório é gerado em **PDF**, com base nos feedbacks armazenados no banco de dados, e enviado por **email** aos administradores cadastrados.  
 A execução é **automatizada via Cloud Scheduler**, garantindo que o relatório seja enviado periodicamente sem intervenção manual.
 
----
-
 ## 🚀 Visão Geral
 
 - 📅 Execução automática (semanal)
@@ -15,8 +13,6 @@ A execução é **automatizada via Cloud Scheduler**, garantindo que o relatóri
 - 📄 Geração de PDF com layout personalizado
 - ✉️ Envio de email com anexo via SendGrid
 - 🔒 Função privada (sem acesso público)
-
----
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -30,8 +26,6 @@ A execução é **automatizada via Cloud Scheduler**, garantindo que o relatóri
 - **SendGrid**
 - **OpenHTMLToPDF**
 - **Maven**
-
----
 
 ## 🧩 Estrutura do Projeto
 
@@ -77,8 +71,6 @@ src/
 
 - **application.properties**: Arquivo de configuração da aplicação, incluindo integração com Cloud SQL, Secret Manager e SendGrid.
 
----
-
 ## ⚙️ Funcionamento da Função
 
 1. A função é acionada automaticamente pelo **Cloud Scheduler**.
@@ -87,8 +79,6 @@ src/
 4. Os dados são processados e consolidados.
 5. Um **relatório em PDF** é gerado.
 6. O relatório é enviado por **email** aos administradores.
-
----
 
 ## 🔧 Configuração do Projeto
 
@@ -112,8 +102,6 @@ spring.config.import=sm://
 
 A função se conecta a um banco PostgreSQL hospedado no Cloud SQL, utilizando o Cloud SQL Socket Factory.
 
-
---- 
 
 ## 🚀 Deploy da Cloud Function + Cloud Scheduler
 
@@ -160,7 +148,7 @@ A Service Account do Cloud Scheduler é responsável por invocar a Cloud Functio
 
 ---
 
-### 📦 Build do Projeto
+### 1. Build do Projeto
 
 Antes do deploy, é necessário gerar o artefato da aplicação utilizando o Maven:
 
@@ -171,7 +159,7 @@ mvn clean package
 Ao final do processo, o JAR será gerado no diretório:
 `target/deploy/`
 
-### ☁️ Deploy da Função no Google Cloud
+### 2. Deploy da Função no Google Cloud
 
 O deploy da função é realizado com o comando abaixo:
 ```powershell
@@ -206,11 +194,10 @@ gcloud functions deploy weekly-report-function `
 
 Para fins de teste, é possível adicionar o parâmetro `--allow-unauthenticated` para permitir chamadas públicas temporariamente.
 
-> ⚠️ Para produção, deve ser feito um deploy **SEM** esse parâmetro, garantindo que a função permaneça privada.
+⚠️ Para produção, deve ser feito um deploy **SEM** esse parâmetro, garantindo que a função permaneça privada.
 
 
-
-### ⏰ Integração com Cloud Scheduler
+### 3. Integração com Cloud Scheduler
 
 Essa função foi pensada para usar em conjunto com o Cloud Scheduler, que vai atuar como gatilho da função, realizando chamadas HTTP autenticadas através de autenticação **OIDC**.
 
@@ -233,7 +220,6 @@ gcloud scheduler jobs create http weekly-report `
 Para fins de teste, o agendamento pode ser configurado com uma frequência menor, como:
 `*/5 * * * *` → (envio a cada 5 minutos).
 
----
 
 ## 🔐 Segurança
 
@@ -243,7 +229,6 @@ Para fins de teste, o agendamento pode ser configurado com uma frequência menor
 - Segredos sensíveis são armazenados no **Secret Manager**.
 - Não há credenciais hardcoded no código.
 
----
 
 ## 🧾 Relatório PDF
 
@@ -261,7 +246,6 @@ O relatório é gerado a partir de um template HTML (`report-template.html`) e c
 - A avaliação média é exibida como **“-”**
 - A cor utilizada é **neutra (preto)**
 
----
 
 ## ✉️ Envio de Email
 
@@ -276,15 +260,6 @@ O email contém:
 
 O arquivo PDF é nomeado como: `relatorio-semanal-YYYY-MM-DD.pdf`
 
----
-
-## 📌 Observações
-
-- Emails podem ser direcionados para a caixa de spam, pois o projeto não utiliza domínio próprio.
-
-- O projeto foi desenvolvido com foco acadêmico, priorizando boas práticas de arquitetura e segurança.
-
---- 
 
 ## 📄 Licença
 
